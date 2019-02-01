@@ -34,7 +34,7 @@ return(list(disto=disto))
 Lplot <- function(distance, relatedness, permutations){
   library(ggplot2)
   ot <- mDistoLoess(distance, relatedness, permutations) ## Takes a long time!! Leave overnight
-  dd <- data.frame(cov = sdist[lower.tri(sdist)], obs = attr(ot$disto, "obs"), lci = attr(ot$disto, "CI")[1,], uci = attr(ot$disto, "CI")[2,])
+  dd <- data.frame(cov = distance[lower.tri(distance)], obs = attr(ot$disto, "obs"), lci = attr(ot$disto, "CI")[1,], uci = attr(ot$disto, "CI")[2,])
   P <- ggplot(dd, aes(x=cov,y=obs)) + geom_line(size=1.2) + geom_ribbon(aes(ymax = uci, ymin = lci), alpha = 0.3) + theme_minimal() + 
     geom_hline(yintercept = mean(ot$disto), lty = 3) + ylab("Mean relatedness") + xlab("Distance (Km)") + geom_rug(sides = "b", alpha = 0.02) +
     theme(axis.title.y = element_text(size=20, color = "black", face = "bold"),
@@ -43,7 +43,7 @@ return(P)
   }
 
 ################ Usage
-# D is a geographic distance matrix (a full matrix NOT a dist object)
-# R is a relatedness matrix (a full matrix NOT a dist object)
+D <- matrix(ncol=100, nrow=100, rnorm(100)) # D is a geographic distance matrix (a full matrix NOT a dist object)
+R <- matrix(ncol=100, nrow=100, rnorm(100)) # R is a relatedness matrix (a full matrix NOT a dist object)
 P1 <- Lplot(distance=D, relatedness=R, permutations=999) ##
 P1

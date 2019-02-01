@@ -45,5 +45,5 @@ return(P)
 ################ Usage
 D <- matrix(ncol=100, nrow=100, rnorm(100)) # D is a geographic distance matrix (a full matrix NOT a dist object)
 R <- matrix(ncol=100, nrow=100, rnorm(100)) # R is a relatedness matrix (a full matrix NOT a dist object)
-P1 <- Lplot(distance=D, relatedness=R, permutations=99) ## Define number of permutations 
+P1 <- Lplot(distance=D, relatedness=R, permutations=999) ## Define number of permutations 
 P1
